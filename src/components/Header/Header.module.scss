@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.counter,
+.timer {
+  font-size: 50px;
+  color: #fff;
+}
+.counter span {
+  color: #aca6a6;
+}
+
+.button {
+  cursor: pointer;
+  background: #567fed;
+  border-radius: 10px;
+  font-size: 30px;
+  padding: 7px 20px;
+  transition: opacity 0.4s ease;
+
+  &:hover {
+    background-color: lighten(#567fed, 3%);
+  }
+}
+
+.button.hide {
+  cursor: default;
+  opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+  .counter,
+  .timer {
+    font-size: 32px;
+  }
+  .button {
+    font-size: 16px;
+  }
+}

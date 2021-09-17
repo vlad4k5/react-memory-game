@@ -1,0 +1,109 @@
+.board {
+  width: 100%;
+  padding-top: 100px;
+  padding-top: 50px;
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 35px;
+    transition: 0.4s ease;
+  }
+
+  .hide {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .results {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.4s ease;
+    font-size: 25px;
+    text-align: center;
+
+    .resultsTimes {
+      margin-bottom: 15px;
+    }
+
+    .resetResultsButton {
+      margin-top: 30px;
+      color: #fff;
+      cursor: pointer;
+      background: #ed565e;
+      border-radius: 5px;
+      font-size: 20px;
+      padding: 7px 20px;
+      transition: opacity 0.4s ease;
+
+      &:hover {
+        background-color: lighten(#ed565e, 3%);
+      }
+    }
+
+    .noResultsCase {
+      white-space: nowrap;
+      opacity: 0.4;
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .board {
+    .cards {
+      gap: 25px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .board {
+    padding-top: 50px;
+    .cards {
+      gap: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .board {
+    .cards {
+      gap: 15px;
+    }
+    .results {
+      .noResultsCase {
+        font-size: 16px;
+      }
+      .resetResultsButton {
+        font-size: 18px;
+        padding: 5px 14px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .board {
+    .cards {
+      gap: 10px;
+    }
+    .results {
+      .resetResultsButton {
+        font-size: 16px;
+        padding: 4px 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .board {
+    .cards {
+      gap: 5px;
+    }
+  }
+}
