@@ -1,31 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import Card from '../Card/Card'
 import Header from '../Header/Header'
 import s from "./Board.module.scss"
-import { useSelector } from "react-redux";
-import { formatTime } from "../../assets/formatTime";
+import { useDispatch, useSelector } from "react-redux"
+import { formatTime } from "../../assets/formatTime"
+import { setCardOpen, startGame } from '../../store/gameReducer'
 
 const Board = () => {
 
-  const { cards, isGameStarted } = useSelector((state) =>  state.gameReducer);
-  let [times, setTimes] = useState([]);
+  const { cards, isGameStarted, cardsGuessed, timer, isInterfaceBlocked } = useSelector(({gameReducer}) => gameReducer)
+  let [times, setTimes] = useState([])
 
   useEffect(() => {
-    let timers = JSON.parse(localStorage.getItem("times")) || [];
-    timers.sort((a, b) => a - b);
-    setTimes(timers.slice(0, 10));
-  }, [isGameStarted]);
+    let scores = JSON.parse(localStorage.getItem("scores")) || []
+    scores.sort((a, b) => a - b)
+    setTimes(scores.slice(0, 10))
+  }, [isGameStarted])
 
   const resetResults = () => {
     localStorage.clear()
     setTimes([])
   }
 
+  const dispatch = useDispatch()
+
+  const startGameCallback = useCallback(() => {
+    dispatch(startGame())
+  }, [])
+
+  const setCardOpenCallback = useCallback((id, value) => {
+    dispatch(setCardOpen(id, value))
+  }, [])
+
   return <div className={s.board}>
-    <Header />
+    <Header cardsGuessed={cardsGuessed} isGameStarted={isGameStarted} timer={timer} startGameCallback={startGameCallback}/>
 
     <div className={`${s.cards} ${!isGameStarted && s.hide}`}>
-      {cards.map((card) => (<Card key={card.id} {...card} />))}
+      {cards.map((card) => (<Card key={card.id} {...card} isInterfaceBlocked={isInterfaceBlocked} 
+      isGameStarted={isGameStarted} setCardOpenCallback={setCardOpenCallback}/>))}
     </div>
 
     <div className={`${s.results} ${isGameStarted && s.hide}`}>
@@ -36,4 +48,4 @@ const Board = () => {
     </div>
   </div>
 }
-export default Board
+export default memo(Board)

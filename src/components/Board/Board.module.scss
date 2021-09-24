@@ -8,7 +8,7 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 35px;
-    transition: 0.4s ease;
+    transition: 1s ease;
   }
 
   .hide {
@@ -18,7 +18,7 @@
 
   .results {
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: 0.4s ease;

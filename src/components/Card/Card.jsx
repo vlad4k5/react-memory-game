@@ -1,30 +1,19 @@
-import React from "react";
-import s from "./Card.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setCardOpen } from "../../store/gameReducer";
+import s from "./Card.module.scss"
+import { memo } from "react"
 
-
-const Card = ({ id, isOpen, value, isOnBoard }) => {
+const Card = ({ id, isOpen, value, isOnBoard, isInterfaceBlocked, isGameStarted, setCardOpenCallback }) => {
   
-  const dispatch = useDispatch();
-  const { isInterfaceBlocked, isGameStarted } = useSelector(
-    (state) => state.gameReducer
-  );
-  function openCard(id, value) {
-    dispatch(setCardOpen(id, value));
+
+  const openCard = (id, value) => {
+    setCardOpenCallback(id, value)
   }
-  return (
-    <button
+  
+  return <button
       disabled={isInterfaceBlocked || !isOnBoard || !isGameStarted || isOpen}
-      className={`${s.card} ${isOpen && s.active} ${
-        !isOnBoard && s.hide
-      } ${!isGameStarted && s.disabled}`}
-      onClick={() => openCard(id, value)}
-    >
+      className={`${s.card} ${isOpen && s.active} ${!isOnBoard && s.hide} ${!isGameStarted && s.disabled}`}
+      onClick={() => openCard(id, value)}>
       <div className={s.front}></div>
       <div className={s.back}>{value}</div>
     </button>
-  );
-};
-
-export default Card;
+}
+export default memo(Card)
