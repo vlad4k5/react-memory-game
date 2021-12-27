@@ -1,16 +1,16 @@
-import { shuffle } from "../assets/shuffle"
+import { shuffle } from '../assets/shuffle'
 
-const SET_CARD_OPEN = "SET_CARD_OPEN"
-const SET_LOCAL_TIMER = "SET_LOCAL_TIMER"
-const ADD_CARD_TO_OPEN_CARDS = "ADD_CARD_TO_OPEN_CARDS"
-const CLOSE_ALL_CARDS = "CLOSE_ALL_CARDS"
-const TOOGLE_BLOCKED_INTERFACE = "TOOGLE_BLOCKED_INTERFACE"
-const TOOGLE_GAME_STARTED = "TOOGLE_GAME_STARTED"
-const ADD_CARD_TO_GUESSED_CARD = "ADD_CARD_TO_GUESSED_CARD"
-const SET_TIMER_ID = "SET_TIMER_ID"
-const SET_INTERVAL_ID = "SET_INTERVAL_ID"
-const RESET_GAME = "RESET_GAME"
-const SET_GAME_TIME = "SET_GAME_TIME"
+const SET_CARD_OPEN = 'SET_CARD_OPEN'
+const SET_LOCAL_TIMER = 'SET_LOCAL_TIMER'
+const ADD_CARD_TO_OPEN_CARDS = 'ADD_CARD_TO_OPEN_CARDS'
+const CLOSE_ALL_CARDS = 'CLOSE_ALL_CARDS'
+const TOOGLE_BLOCKED_INTERFACE = 'TOOGLE_BLOCKED_INTERFACE'
+const TOOGLE_GAME_STARTED = 'TOOGLE_GAME_STARTED'
+const ADD_CARD_TO_GUESSED_CARD = 'ADD_CARD_TO_GUESSED_CARD'
+const SET_TIMER_ID = 'SET_TIMER_ID'
+const SET_INTERVAL_ID = 'SET_INTERVAL_ID'
+const RESET_GAME = 'RESET_GAME'
+const SET_GAME_TIME = 'SET_GAME_TIME'
 
 const initialState = {
   timer: 0,
@@ -22,22 +22,22 @@ const initialState = {
   timerId: undefined,
   intervalId: undefined,
   cards: [
-    { id: 1, isOpen: false, value: "cat", isOnBoard: true },
-    { id: 2, isOpen: false, value: "cat", isOnBoard: true },
-    { id: 3, isOpen: false, value: "dog", isOnBoard: true },
-    { id: 4, isOpen: false, value: "dog", isOnBoard: true },
-    { id: 5, isOpen: false, value: "fish", isOnBoard: true },
-    { id: 6, isOpen: false, value: "fish", isOnBoard: true },
-    { id: 7, isOpen: false, value: "pig", isOnBoard: true },
-    { id: 8, isOpen: false, value: "pig", isOnBoard: true },
-    { id: 9, isOpen: false, value: "mouse", isOnBoard: true },
-    { id: 10, isOpen: false, value: "mouse", isOnBoard: true },
-    { id: 11, isOpen: false, value: "bird", isOnBoard: true },
-    { id: 12, isOpen: false, value: "bird", isOnBoard: true },
-    { id: 13, isOpen: false, value: "snake", isOnBoard: true },
-    { id: 14, isOpen: false, value: "snake", isOnBoard: true },
-    { id: 15, isOpen: false, value: "monkey", isOnBoard: true },
-    { id: 16, isOpen: false, value: "monkey", isOnBoard: true },
+    { id: 1, isOpen: false, value: 'cat', isOnBoard: true },
+    { id: 2, isOpen: false, value: 'cat', isOnBoard: true },
+    { id: 3, isOpen: false, value: 'dog', isOnBoard: true },
+    { id: 4, isOpen: false, value: 'dog', isOnBoard: true },
+    { id: 5, isOpen: false, value: 'fish', isOnBoard: true },
+    { id: 6, isOpen: false, value: 'fish', isOnBoard: true },
+    { id: 7, isOpen: false, value: 'pig', isOnBoard: true },
+    { id: 8, isOpen: false, value: 'pig', isOnBoard: true },
+    { id: 9, isOpen: false, value: 'mouse', isOnBoard: true },
+    { id: 10, isOpen: false, value: 'mouse', isOnBoard: true },
+    { id: 11, isOpen: false, value: 'bird', isOnBoard: true },
+    { id: 12, isOpen: false, value: 'bird', isOnBoard: true },
+    { id: 13, isOpen: false, value: 'snake', isOnBoard: true },
+    { id: 14, isOpen: false, value: 'snake', isOnBoard: true },
+    { id: 15, isOpen: false, value: 'monkey', isOnBoard: true },
+    { id: 16, isOpen: false, value: 'monkey', isOnBoard: true },
   ],
 }
 
@@ -46,7 +46,7 @@ const gameReducer = (state = initialState, action) => {
     case SET_CARD_OPEN: {
       return {
         ...state,
-        cards: state.cards.map((card) => {
+        cards: state.cards.map(card => {
           if (card.id === action.payload) card.isOpen = true
           return card
         }),
@@ -67,7 +67,7 @@ const gameReducer = (state = initialState, action) => {
     case CLOSE_ALL_CARDS: {
       return {
         ...state,
-        cards: state.cards.map((card) => {
+        cards: state.cards.map(card => {
           card.isOpen = false
           return card
         }),
@@ -90,8 +90,8 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         cardsGuessed: state.cardsGuessed + 2,
-        cards: state.cards.map((card) => {
-          if (action.payload.some((id) => id === card.id)) {
+        cards: state.cards.map(card => {
+          if (action.payload.some(id => id === card.id)) {
             card.isOnBoard = false
           }
           return card
@@ -122,7 +122,7 @@ const gameReducer = (state = initialState, action) => {
         cardsGuessed: 0,
         timer: 0,
         cards: shuffle(
-          state.cards.map((card) => {
+          state.cards.map(card => {
             card.isOnBoard = true
             return card
           })
@@ -136,21 +136,21 @@ const gameReducer = (state = initialState, action) => {
 
 // actions
 
-export const setLocalTimerAC = (bool) => {
+export const setLocalTimerAC = bool => {
   return {
     type: SET_LOCAL_TIMER,
     payload: bool,
   }
 }
 
-export const setCardOpenAC = (id) => {
+export const setCardOpenAC = id => {
   return {
     type: SET_CARD_OPEN,
     payload: id,
   }
 }
 
-export const addCardToOpenedCardsAC = (data) => {
+export const addCardToOpenedCardsAC = data => {
   return {
     type: ADD_CARD_TO_OPEN_CARDS,
     payload: data,
@@ -163,14 +163,14 @@ export const closeAllCardsAC = () => {
   }
 }
 
-export const toogleIsBlockedInterfaceAC = (bool) => {
+export const toogleIsBlockedInterfaceAC = bool => {
   return {
     type: TOOGLE_BLOCKED_INTERFACE,
     payload: bool,
   }
 }
 
-export const toggleisGameStartededAC = (bool) => {
+export const toggleisGameStartededAC = bool => {
   return {
     type: TOOGLE_GAME_STARTED,
     payload: bool,
@@ -184,31 +184,31 @@ export const addCardToGuessedCardsAC = (id1, id2) => {
   }
 }
 
-const setTimerIdAC = (id) => {
+const setTimerIdAC = id => {
   return {
     type: SET_TIMER_ID,
     payload: id,
   }
 }
 
-const setIntervalIdAC = (id) => {
+const setIntervalIdAC = id => {
   return {
     type: SET_INTERVAL_ID,
     payload: id,
   }
 }
 
-const setGameTimeAC = (seconds) => {
+const setGameTimeAC = seconds => {
   return {
     type: SET_GAME_TIME,
     payload: seconds,
   }
 }
 
-//thunks
+// thunks
 
 const closeAllCardsThunk = () => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(toogleIsBlockedInterfaceAC(true))
     setTimeout(() => {
       dispatch(closeAllCardsAC())
@@ -218,7 +218,7 @@ const closeAllCardsThunk = () => {
 }
 
 const addCardsToGuessedThunk = (id1, id2) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(toogleIsBlockedInterfaceAC(true))
     setTimeout(() => {
       dispatch(addCardToGuessedCardsAC(id1, id2))
@@ -235,23 +235,23 @@ const resetGame = () => {
 
 export const endGame = () => {
   return (dispatch, getState) => {
-    let {intervalId, timer} = getState().gameReducer
+    const { intervalId, timer } = getState().gameReducer
     dispatch(toggleisGameStartededAC(false))
     clearInterval(intervalId)
 
-    let times = JSON.parse(localStorage.getItem("scores")) || []
+    const times = JSON.parse(localStorage.getItem('scores')) || []
     times.push(timer)
-    localStorage.setItem("scores", JSON.stringify(times))
+    localStorage.setItem('scores', JSON.stringify(times))
   }
 }
 
-export let setCardOpen = (id, value) => {
+export const setCardOpen = (id, value) => {
   return (dispatch, getState) => {
     dispatch(setCardOpenAC(id))
-    let { openedCards, isLocalTimer, cardsGuessed } = getState().gameReducer
+    const { openedCards, isLocalTimer, cardsGuessed } = getState().gameReducer
     if (!isLocalTimer) {
       dispatch(setLocalTimerAC(true))
-      let timerId = setTimeout(() => {
+      const timerId = setTimeout(() => {
         dispatch(setLocalTimerAC(false))
         dispatch(closeAllCardsAC())
       }, 3000)
@@ -276,7 +276,7 @@ export const startGame = () => {
     dispatch(toggleisGameStartededAC(true))
     dispatch(resetGame())
     let timer = getState().gameReducer.timer
-    let intervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       timer++
       dispatch(setGameTimeAC(timer))
     }, 1000)
